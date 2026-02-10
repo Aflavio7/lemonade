@@ -8,7 +8,7 @@
     "server": "cd server && npm run dev",
     "client": "cd client && npm run dev",
     "install:all": "npm install && cd server && npm install && cd ../client && npm install",
-    "build": "cd client && npm run build",
+    "build": "npm install && cd server && npm install && cd ../client && npm install && npm run build",
     "db:migrate": "cd server && npx prisma migrate dev --name init",
     "db:seed": "cd server && node prisma/seed.js",
     "setup": "npm run install:all && npm run db:migrate && npm run db:seed"
