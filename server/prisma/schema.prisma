@@ -1,0 +1,29 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Setting {
+  id        String   @id @default(uuid())
+  key       String   @unique
+  value     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Log {
+  id             String   @id @default(uuid())
+  emailFrom      String
+  emailSubject   String
+  emailBody      String   @default("")
+  detectedIntent String
+  intentDetails  String   @default("")
+  messageSent    String
+  sentTo         String
+  status         String   @default("success")
+  createdAt      DateTime @default(now())
+}
