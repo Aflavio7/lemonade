@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: lemonade-backend
+    env: node
+    plan: free
+    rootDir: server
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: NODE_ENV
+        value: production
+      # You should add these in the Render Dashboard under "Environment Variables":
+      # - GEMINI_API_KEY
+      # - TWILIO_ACCOUNT_SID
+      # - TWILIO_AUTH_TOKEN
+      # - WHATSAPP_PHONE_NUMBER
+      # - IMAP_USER
+      # - IMAP_PASS
