@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const fs = require('fs');
 require('dotenv').config();
 
 const { initDatabase } = require('./db/database');
@@ -33,16 +34,29 @@ app.get('/api/health', (req, res) => {
     });
 });
 
-// Serve static files from React build in production
+// Serve static files from React build in production if they exist
 const clientBuildPath = path.join(__dirname, '../../client/dist');
-app.use(express.static(clientBuildPath));
+if (fs.existsSync(clientBuildPath)) {
+    console.log('🌐 Serving frontend from:', clientBuildPath);
+    app.use(express.static(clientBuildPath));
 
-// Catch-all route for React SPA
-app.get('*', (req, res) => {
-    if (!req.path.startsWith('/api')) {
-        res.sendFile(path.join(clientBuildPath, 'index.html'));
-    }
-});
+    // Catch-all route for React SPA
+    app.get('*', (req, res) => {
+        if (!req.path.startsWith('/api')) {
+            res.sendFile(path.join(clientBuildPath, 'index.html'));
+        }
+    });
+} else {
+    console.log('ℹ️ Frontend build not found, skipping static file serving.');
+    // Simple landing page for the backend URL
+    app.get('/', (req, res) => {
+        res.json({
+            message: 'CRM Automation API is running.',
+            status: 'online',
+            documentation: 'https://github.com/Aflavio7/lemonade'
+        });
+    });
+}
 
 // Error handling middleware
 app.use((err, req, res, next) => {
