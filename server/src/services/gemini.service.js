@@ -15,7 +15,7 @@ class GeminiService {
         }
 
         this.genAI = new GoogleGenerativeAI(apiKey);
-        this.model = this.genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+        this.model = this.genAI.getGenerativeModel({ model: 'gemini-1.5-flash-latest' });
     }
 
     async analyzeIntent(email) {
