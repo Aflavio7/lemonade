@@ -79,7 +79,7 @@ class AutomationService {
             }
 
             const mailProvider = settingsDB.get('mail_provider') || 'gmail';
-            console.log(`🔍 Checking for new emails via ${mailProvider}...`);
+            console.log(`🔍 [AUTOMATION CYCLE] Checking for new emails via ${mailProvider}...`);
 
             let emails = [];
             let lastProcessedIdKey = '';

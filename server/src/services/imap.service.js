@@ -36,6 +36,7 @@ class ImapService {
         await this.initialize();
         if (!this.config) {
             console.log('⚠️ IMAP configuration missing. Skipping IMAP fetch.');
+            console.log(`Debug IMAP settings: host=${settingsDB.get('imap_host') ? 'SET' : 'MISSING'}, user=${settingsDB.get('imap_user') ? 'SET' : 'MISSING'}, pass=${settingsDB.get('imap_pass') ? 'SET' : 'MISSING'}`);
             return [];
         }
 
